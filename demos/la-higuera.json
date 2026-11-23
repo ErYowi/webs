@@ -1,0 +1,82 @@
+{
+ "nombre": "Taberna La Higuera",
+ "tipo": "Taberna",
+ "ciudad": "Murcia",
+ "estilo": "taberna",
+ "eslogan": "Tapas de siempre, vermut de grifo y terraza bajo la higuera.",
+ "direccion": "Calle de Ejemplo 12",
+ "telefono": "968 000 000",
+ "whatsapp": "600000000",
+ "destacados": [
+  "Terraza",
+  "Menú del día 12 €",
+  "Vermut de grifo"
+ ],
+ "sobre": "Taberna de barrio con cocina murciana de toda la vida: marineras, zarangollo y caldero los domingos. (Negocio de ejemplo.)",
+ "horario": {
+  "lun": "Cerrado",
+  "mar": "12:30-16:30, 20:00-00:00",
+  "mie": "12:30-16:30, 20:00-00:00",
+  "jue": "12:30-16:30, 20:00-00:00",
+  "vie": "12:30-16:30, 20:00-01:00",
+  "sab": "12:30-17:00, 20:00-01:00",
+  "dom": "12:30-17:00"
+ },
+ "carta": [
+  {
+   "cat": "Tapas",
+   "items": [
+    {
+     "n": "Marinera",
+     "p": "2,20",
+     "d": "Rosquilla, ensaladilla y anchoa."
+    },
+    {
+     "n": "Zarangollo",
+     "p": "6,50"
+    },
+    {
+     "n": "Patatas bravas",
+     "p": "5,00",
+     "d": "Con nuestra salsa picante de la casa."
+    },
+    {
+     "n": "Michirones",
+     "p": "6,00"
+    }
+   ]
+  },
+  {
+   "cat": "Raciones",
+   "items": [
+    {
+     "n": "Pulpo a la plancha",
+     "p": "14,50"
+    },
+    {
+     "n": "Calamares a la andaluza",
+     "p": "11,00"
+    },
+    {
+     "n": "Pisto murciano con huevo",
+     "p": "8,50"
+    }
+   ]
+  },
+  {
+   "cat": "Postres",
+   "items": [
+    {
+     "n": "Paparajotes",
+     "p": "4,50"
+    },
+    {
+     "n": "Tarta de queso",
+     "p": "5,00"
+    }
+   ]
+  }
+ ],
+ "v": 1,
+ "ejemplo": true
+}

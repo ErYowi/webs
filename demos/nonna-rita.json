@@ -1,0 +1,75 @@
+{
+ "nombre": "Pizzería Nonna Rita",
+ "tipo": "Pizzería",
+ "ciudad": "Murcia",
+ "estilo": "fresco",
+ "eslogan": "Masa madre de 48 horas y horno de leña. Para llevar o aquí.",
+ "direccion": "Avenida de Ejemplo 45",
+ "telefono": "968 000 000",
+ "whatsapp": "600000000",
+ "destacados": [
+  "Horno de leña",
+  "Para llevar",
+  "Opciones veganas"
+ ],
+ "sobre": "Pizza napolitana hecha cada día. (Negocio de ejemplo.)",
+ "horario": {
+  "lun": "20:00-23:30",
+  "mar": "20:00-23:30",
+  "mie": "Cerrado",
+  "jue": "20:00-23:30",
+  "vie": "13:30-16:00, 20:00-00:00",
+  "sab": "13:30-16:00, 20:00-00:00",
+  "dom": "13:30-16:00, 20:00-23:30"
+ },
+ "carta": [
+  {
+   "cat": "Pizzas",
+   "items": [
+    {
+     "n": "Margherita",
+     "p": "9,50",
+     "d": "Tomate San Marzano, fior di latte y albahaca."
+    },
+    {
+     "n": "Diavola",
+     "p": "11,50",
+     "d": "Salami picante y guindilla."
+    },
+    {
+     "n": "Quattro formaggi",
+     "p": "12,00"
+    },
+    {
+     "n": "Huertana",
+     "p": "11,00",
+     "d": "Verduras de la huerta de Murcia."
+    }
+   ]
+  },
+  {
+   "cat": "Entrantes",
+   "items": [
+    {
+     "n": "Burrata",
+     "p": "10,50"
+    },
+    {
+     "n": "Focaccia de romero",
+     "p": "5,00"
+    }
+   ]
+  },
+  {
+   "cat": "Postres",
+   "items": [
+    {
+     "n": "Tiramisú",
+     "p": "5,50"
+    }
+   ]
+  }
+ ],
+ "v": 1,
+ "ejemplo": true
+}

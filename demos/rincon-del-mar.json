@@ -1,0 +1,61 @@
+{
+ "nombre": "El Rincón del Mar",
+ "tipo": "Arrocería",
+ "ciudad": "Murcia",
+ "estilo": "mediterraneo",
+ "eslogan": "Arroces y pescado fresco del Mar Menor.",
+ "direccion": "Plaza de Ejemplo 3",
+ "telefono": "968 000 000",
+ "whatsapp": "600000000",
+ "destacados": [
+  "Caldero del Mar Menor",
+  "Reservas para grupos",
+  "Aparcamiento cerca"
+ ],
+ "sobre": "Arroces al punto y pescado de lonja. (Negocio de ejemplo.)",
+ "horario": {
+  "lun": "Cerrado",
+  "mar": "13:00-16:30",
+  "mie": "13:00-16:30",
+  "jue": "13:00-16:30",
+  "vie": "13:00-16:30, 20:30-23:30",
+  "sab": "13:00-17:00, 20:30-23:30",
+  "dom": "13:00-17:00"
+ },
+ "carta": [
+  {
+   "cat": "Arroces",
+   "items": [
+    {
+     "n": "Caldero (mín. 2 pers.)",
+     "p": "19,00",
+     "d": "Precio por persona."
+    },
+    {
+     "n": "Arroz con bogavante",
+     "p": "26,00",
+     "d": "Precio por persona."
+    },
+    {
+     "n": "Arroz de verduras",
+     "p": "15,00"
+    }
+   ]
+  },
+  {
+   "cat": "Pescados",
+   "items": [
+    {
+     "n": "Dorada a la sal",
+     "p": "18,00"
+    },
+    {
+     "n": "Langostinos del Mar Menor",
+     "p": "22,00"
+    }
+   ]
+  }
+ ],
+ "v": 1,
+ "ejemplo": true
+}

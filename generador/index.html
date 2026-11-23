@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Generador de demos</title>
+<meta name="robots" content="noindex">
+<style>
+  :root { --bg:#f3f4f6; --ink:#111827; --soft:#6b7280; --line:#e5e7eb; --accent:#ea580c; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); font:15px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif; }
+  header { padding:18px 22px; background:#111827; color:#fff; display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; }
+  header h1 { margin:0; font-size:18px; }
+  header p { margin:0; color:#9ca3af; font-size:13px; }
+  main { display:grid; gap:20px; padding:20px; }
+  @media (min-width:1050px) { main { grid-template-columns:minmax(380px, 520px) 1fr; } .preview { position:sticky; top:20px; height:calc(100vh - 40px); } }
+  form { background:#fff; border:1px solid var(--line); border-radius:16px; padding:20px; }
+  fieldset { border:0; padding:0; margin:0 0 22px; }
+  legend { font-weight:700; font-size:15px; margin-bottom:10px; }
+  label { display:grid; gap:4px; margin-bottom:12px; font-size:13.5px; font-weight:600; }
+  label small { font-weight:400; color:var(--soft); }
+  input, textarea, select { font:inherit; padding:10px 12px; border:1px solid var(--line); border-radius:10px; background:#fff; width:100%; }
+  textarea { min-height:150px; font-family:ui-monospace, Menlo, monospace; font-size:13px; }
+  input:focus, textarea:focus, select:focus { outline:2px solid var(--accent); border-color:transparent; }
+  .grid2 { display:grid; grid-template-columns:1fr 1fr; gap:0 12px; }
+  .days { display:grid; grid-template-columns:90px 1fr; gap:6px 10px; align-items:center; font-size:13.5px; }
+  .days input { padding:8px 10px; }
+  .styles { display:grid; grid-template-columns:repeat(4, 1fr); gap:8px; }
+  .styles button { border:2px solid var(--line); border-radius:12px; padding:10px 6px; background:#fff; cursor:pointer; font:600 13px system-ui; }
+  .styles button[aria-pressed="true"] { border-color:var(--accent); }
+  .styles i { display:block; height:26px; border-radius:7px; margin-bottom:6px; }
+  .actions { position:sticky; bottom:0; background:#fff; padding:14px 0 4px; display:flex; gap:8px; flex-wrap:wrap; border-top:1px solid var(--line); }
+  .btn { border:0; border-radius:10px; padding:11px 16px; font:700 14px system-ui; cursor:pointer; background:#e5e7eb; color:var(--ink); }
+  .btn.primary { background:var(--accent); color:#fff; }
+  .preview { background:#fff; border:1px solid var(--line); border-radius:16px; overflow:hidden; display:flex; flex-direction:column; min-height:640px; }
+  .preview .bar { padding:10px 14px; border-bottom:1px solid var(--line); font-size:13px; color:var(--soft); display:flex; justify-content:space-between; gap:10px; }
+  .phone { flex:1; display:flex; justify-content:center; background:#e5e7eb; padding:16px; }
+  iframe { width:390px; max-width:100%; height:100%; min-height:600px; border:0; border-radius:22px; background:#fff; box-shadow:0 10px 40px rgba(0,0,0,.15); }
+  .out { margin-top:10px; font-size:12.5px; word-break:break-all; color:var(--soft); }
+  .toast { position:fixed; bottom:20px; left:50%; transform:translateX(-50%); background:#111827; color:#fff; padding:10px 16px; border-radius:10px; font-size:14px; }
+  .hint { color:var(--soft); font-size:13px; margin:-4px 0 10px; }
+</style>
+</head>
+<body>
+<header>
+  <div><h1>Generador de demos para restaurantes</h1><p>Rellena con lo que sale en Google Maps del local y copia el enlace.</p></div>
+  <button class="btn" type="button" id="loadEx">Cargar ejemplo</button>
+</header>
+<main>
+  <form id="f" autocomplete="off">
+    <fieldset>
+      <legend>1. El local</legend>
+      <label>Nombre del local<input name="nombre" required placeholder="Bar El Ejemplo"></label>
+      <div class="grid2">
+        <label>Tipo<input name="tipo" placeholder="Bar, Restaurante, Pizzería…" list="tipos"></label>
+        <label>Ciudad<input name="ciudad" value="Murcia"></label>
+      </div>
+      <datalist id="tipos"><option>Bar</option><option>Restaurante</option><option>Taberna</option><option>Cafetería</option><option>Pizzería</option><option>Arrocería</option><option>Hamburguesería</option><option>Coctelería</option><option>Cervecería</option></datalist>
+      <label>Frase de portada <small>(si la dejas vacía, pongo una según el tipo)</small><input name="eslogan" placeholder="Tapas de siempre y terraza en el centro"></label>
+      <label>Destacados <small>(separados por comas)</small><input name="destacados" placeholder="Terraza, Menú del día 12 €, Sin gluten"></label>
+      <label>Sobre el local <small>(2-3 líneas; mira sus reseñas para sacar ideas)</small><textarea name="sobre" style="min-height:70px;font-family:inherit"></textarea></label>
+    </fieldset>
+
+    <fieldset>
+      <legend>2. Contacto</legend>
+      <div class="grid2">
+        <label>Teléfono<input name="telefono" inputmode="tel" placeholder="968 12 34 56"></label>
+        <label>WhatsApp para reservas<input name="whatsapp" inputmode="tel" placeholder="Si es móvil, el mismo"></label>
+      </div>
+      <div class="grid2">
+        <label>Dirección<input name="direccion" placeholder="Calle Mayor 1"></label>
+        <label>Instagram<input name="instagram" placeholder="@local"></label>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>3. Horario</legend>
+      <p class="hint">Formato: <code>13:00-16:00, 20:00-00:00</code> o <code>Cerrado</code>.</p>
+      <div class="days" id="days"></div>
+    </fieldset>
+
+    <fieldset>
+      <legend>4. Carta</legend>
+      <p class="hint">Una categoría con <code># Nombre</code> y cada plato así: <code>Plato | precio | descripción</code> (la descripción es opcional).</p>
+      <textarea name="carta" placeholder="# Tapas&#10;Patatas bravas | 5,00 | Con alioli de la casa&#10;Marinera | 2,20&#10;&#10;# Postres&#10;Tarta de queso | 5,00"></textarea>
+    </fieldset>
+
+    <fieldset>
+      <legend>5. Estilo</legend>
+      <div class="styles" id="styles">
+        <button type="button" data-v="taberna"><i style="background:#2f5d46"></i>Taberna</button>
+        <button type="button" data-v="mediterraneo"><i style="background:#1d4e89"></i>Mediterráneo</button>
+        <button type="button" data-v="nocturno"><i style="background:#0d0c0b;border:2px solid #c9a45c"></i>Nocturno</button>
+        <button type="button" data-v="fresco"><i style="background:#d7392b"></i>Fresco</button>
+      </div>
+      <label style="margin-top:12px">Fotos <small>(enlaces https, una por línea; la primera es la portada. Usa solo fotos que el local te dé o tenga permiso para usar.)</small><textarea name="fotos" style="min-height:60px"></textarea></label>
+    </fieldset>
+
+    <div class="actions">
+      <button class="btn primary" type="button" id="copy">Copiar enlace de la demo</button>
+      <button class="btn" type="button" id="open">Abrir</button>
+      <button class="btn" type="button" id="save">Descargar datos</button>
+      <label class="btn" style="margin:0;display:inline-flex">Abrir datos<input type="file" id="load" accept=".json" hidden></label>
+      <div class="out" id="out"></div>
+    </div>
+  </form>
+
+  <div class="preview">
+    <div class="bar"><span>Vista previa en móvil</span><span id="len"></span></div>
+    <div class="phone"><iframe id="frame" title="Vista previa"></iframe></div>
+  </div>
+</main>
+<script src="../codec.js"></script>
+<script>
+(function () {
+  const $ = (s) => document.querySelector(s);
+  const DAYS = [["lun", "Lunes"], ["mar", "Martes"], ["mie", "Miércoles"], ["jue", "Jueves"], ["vie", "Viernes"], ["sab", "Sábado"], ["dom", "Domingo"]];
+  const DEFAULT_H = { lun: "Cerrado", mar: "12:30-16:30, 20:00-00:00", mie: "12:30-16:30, 20:00-00:00", jue: "12:30-16:30, 20:00-00:00", vie: "12:30-16:30, 20:00-01:00", sab: "12:30-17:00, 20:00-01:00", dom: "12:30-17:00" };
+  const SLOGANS = {
+    bar: "Tapas, cañas bien tiradas y buen ambiente.", taberna: "Cocina de siempre y tapas para compartir.", restaurante: "Cocina casera con producto de la tierra.",
+    "cafetería": "Desayunos, café de especialidad y bollería del día.", "pizzería": "Pizza artesana recién salida del horno.", "arrocería": "Arroces al punto y producto del mar.",
+    "hamburguesería": "Hamburguesas de carne seleccionada, hechas al momento.", "coctelería": "Cócteles de autor en un ambiente tranquilo.", "cervecería": "Cervezas de grifo y raciones para compartir.",
+  };
+  const AUTO_STYLE = { "coctelería": "nocturno", "pizzería": "fresco", "hamburguesería": "fresco", "arrocería": "mediterraneo", marisquería: "mediterraneo" };
+  const BASE = new URL("../demo/", location.href).href;
+  const f = $("#f");
+  let estilo = "taberna", styleTouched = false;
+
+  $("#days").innerHTML = DAYS.map(([k, n]) => `<span>${n}</span><input name="h_${k}" value="${DEFAULT_H[k]}">`).join("");
+
+  function parseCarta(txt) {
+    const cats = []; let cur = null;
+    String(txt || "").split(/\r?\n/).forEach((line) => {
+      const l = line.trim(); if (!l) return;
+      if (l.startsWith("#")) { cur = { cat: l.replace(/^#+\s*/, "") || "Carta", items: [] }; cats.push(cur); return; }
+      if (!cur) { cur = { cat: "Carta", items: [] }; cats.push(cur); }
+      const [n, p, ...rest] = l.split("|").map((x) => x.trim());
+      if (n) cur.items.push({ n, p: p || "", ...(rest.length && rest.join(" | ") ? { d: rest.join(" | ") } : {}) });
+    });
+    return cats.filter((c) => c.items.length);
+  }
+  function cartaToText(carta) {
+    return (carta || []).map((c) => `# ${c.cat}\n` + c.items.map((it) => [it.n, it.p, it.d].filter((x) => x != null && x !== "").join(" | ")).join("\n")).join("\n\n");
+  }
+
+  function collect() {
+    const v = (k) => (f.elements[k]?.value || "").trim();
+    const tipo = v("tipo");
+    if (!styleTouched && AUTO_STYLE[tipo.toLowerCase()]) setStyle(AUTO_STYLE[tipo.toLowerCase()], false);
+    const d = {
+      v: 1, nombre: v("nombre"), tipo, ciudad: v("ciudad"), estilo,
+      eslogan: v("eslogan") || SLOGANS[tipo.toLowerCase()] || "",
+      sobre: v("sobre"), telefono: v("telefono"), whatsapp: v("whatsapp"), direccion: v("direccion"), instagram: v("instagram"),
+      destacados: v("destacados").split(",").map((x) => x.trim()).filter(Boolean),
+      horario: Object.fromEntries(DAYS.map(([k]) => [k, v("h_" + k)])),
+      carta: parseCarta(v("carta")),
+      fotos: v("fotos").split(/\s+/).filter((u) => /^https:\/\//.test(u)),
+      autorUrl: new URL("../", location.href).href,
+    };
+    Object.keys(d).forEach((k) => (d[k] === "" || (Array.isArray(d[k]) && !d[k].length)) && delete d[k]);
+    return d;
+  }
+  function fill(d) {
+    f.reset();
+    ["nombre", "tipo", "ciudad", "eslogan", "sobre", "telefono", "whatsapp", "direccion", "instagram"].forEach((k) => (f.elements[k].value = d[k] || ""));
+    f.elements.destacados.value = (d.destacados || []).join(", ");
+    DAYS.forEach(([k]) => (f.elements["h_" + k].value = d.horario?.[k] || ""));
+    f.elements.carta.value = cartaToText(d.carta);
+    f.elements.fotos.value = (d.fotos || []).join("\n");
+    styleTouched = true; setStyle(d.estilo || "taberna", false);
+    update();
+  }
+  function setStyle(v, touched = true) {
+    estilo = v; if (touched) styleTouched = true;
+    document.querySelectorAll("#styles button").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.v === v)));
+  }
+
+  let link = "", t;
+  async function update() {
+    const d = collect();
+    if (!d.nombre) { $("#out").textContent = "Pon al menos el nombre del local."; return; }
+    link = BASE + "#" + (await DemoCodec.encode(d));
+    $("#len").textContent = `Enlace de ${link.length} caracteres`;
+    $("#out").textContent = link;
+    const fr = $("#frame");
+    fr.src = "about:blank";
+    setTimeout(() => (fr.src = link), 20);
+    try { localStorage.setItem("demo-borrador", JSON.stringify(d)); } catch {}
+  }
+  const later = () => { clearTimeout(t); t = setTimeout(update, 500); };
+  f.addEventListener("input", later);
+  $("#styles").onclick = (e) => { const b = e.target.closest("[data-v]"); if (b) { setStyle(b.dataset.v); update(); } };
+
+  function toast(msg) { const el = document.createElement("div"); el.className = "toast"; el.textContent = msg; document.body.appendChild(el); setTimeout(() => el.remove(), 2600); }
+  $("#copy").onclick = async () => { await update(); if (!link) return; try { await navigator.clipboard.writeText(link); toast("Enlace copiado"); } catch { prompt("Copia el enlace:", link); } };
+  $("#open").onclick = async () => { await update(); if (link) window.open(link, "_blank"); };
+  $("#save").onclick = () => {
+    const d = collect(); if (!d.nombre) return toast("Falta el nombre");
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(new Blob([JSON.stringify(d, null, 1)], { type: "application/json" }));
+    a.download = d.nombre.toLowerCase().normalize("NFD").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "") + ".json";
+    a.click();
+  };
+  $("#load").onchange = async (e) => { const file = e.target.files[0]; if (file) fill(JSON.parse(await file.text())); };
+  $("#loadEx").onclick = async () => fill(await (await fetch("../demos/la-higuera.json")).json());
+
+  setStyle("taberna", false);
+  try { const saved = JSON.parse(localStorage.getItem("demo-borrador") || "null"); if (saved && saved.nombre) fill(saved); } catch {}
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+{
+ "nombre": "Medianoche",
+ "tipo": "Coctelería",
+ "ciudad": "Murcia",
+ "estilo": "nocturno",
+ "eslogan": "Cócteles de autor y música en vivo los jueves.",
+ "direccion": "Calle de Ejemplo 7",
+ "telefono": "968 000 000",
+ "whatsapp": "600000000",
+ "destacados": [
+  "Cócteles de autor",
+  "Música en vivo",
+  "Reservados"
+ ],
+ "sobre": "Coctelería íntima en el centro. (Negocio de ejemplo.)",
+ "horario": {
+  "lun": "Cerrado",
+  "mar": "Cerrado",
+  "mie": "19:00-02:00",
+  "jue": "19:00-02:00",
+  "vie": "19:00-03:00",
+  "sab": "19:00-03:00",
+  "dom": "Cerrado"
+ },
+ "carta": [
+  {
+   "cat": "Cócteles",
+   "items": [
+    {
+     "n": "Limonada de la huerta",
+     "p": "10,00",
+     "d": "Ginebra, limón de Murcia y albahaca."
+    },
+    {
+     "n": "Old fashioned",
+     "p": "11,00"
+    },
+    {
+     "n": "Espresso martini",
+     "p": "11,00"
+    }
+   ]
+  },
+  {
+   "cat": "Sin alcohol",
+   "items": [
+    {
+     "n": "Spritz cero",
+     "p": "7,00"
+    }
+   ]
+  }
+ ],
+ "v": 1,
+ "ejemplo": true
+}

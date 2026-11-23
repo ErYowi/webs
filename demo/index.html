@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Cargando…</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=DM+Serif+Display&family=Cormorant+Garamond:wght@500;600&family=Bricolage+Grotesque:wght@500;700;800&family=Karla:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  /* ===== Estilos por tipo de local ===== */
+  :root { --bg:#f6f1e7; --ink:#1d1b16; --soft:#6d665a; --card:#fffdf8; --line:#e4dccb; --accent:#2f5d46; --accent-ink:#fff; --hero-bg:#2f5d46; --hero-ink:#f6f1e7; --display:"Fraunces", Georgia, serif; --body:"Karla", system-ui, sans-serif; --radius:18px; }
+  body[data-estilo="mediterraneo"] { --bg:#fbfaf7; --ink:#14263d; --soft:#5d6b7c; --card:#fff; --line:#e3e8ef; --accent:#1d4e89; --hero-bg:#1d4e89; --hero-ink:#fff; --display:"DM Serif Display", Georgia, serif; --radius:14px; }
+  body[data-estilo="nocturno"] { --bg:#0d0c0b; --ink:#efe6d6; --soft:#a1978a; --card:#171513; --line:#2b2723; --accent:#c9a45c; --accent-ink:#141210; --hero-bg:#0d0c0b; --hero-ink:#efe6d6; --display:"Cormorant Garamond", Georgia, serif; --radius:4px; }
+  body[data-estilo="fresco"] { --bg:#ffffff; --ink:#1b1b1b; --soft:#666; --card:#fff6f2; --line:#f1e1d9; --accent:#d7392b; --hero-bg:#d7392b; --hero-ink:#fff; --display:"Bricolage Grotesque", system-ui, sans-serif; --radius:22px; }
+
+  * { box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { margin:0; background:var(--bg); color:var(--ink); font:17px/1.55 var(--body); -webkit-font-smoothing:antialiased; }
+  a { color:inherit; }
+  img { max-width:100%; display:block; }
+  .wrap { max-width:980px; margin:0 auto; padding:0 20px; }
+
+  /* Aviso de demo */
+  .demo-bar { position:sticky; top:0; z-index:20; background:#111; color:#fff; font:500 13.5px/1.35 "Karla", sans-serif; padding:9px 14px; display:flex; gap:10px; align-items:center; justify-content:center; text-align:center; }
+  .demo-bar a { color:#ffd27a; font-weight:700; white-space:nowrap; }
+
+  /* Portada */
+  .hero { background:var(--hero-bg); color:var(--hero-ink); position:relative; overflow:hidden; }
+  .hero .wrap { padding-top:64px; padding-bottom:56px; position:relative; z-index:1; }
+  .hero.has-photo { background:#000 center/cover no-repeat; }
+  .hero.has-photo::before { content:""; position:absolute; inset:0; background:linear-gradient(180deg, rgba(0,0,0,.25), rgba(0,0,0,.72)); }
+  .kind { font-size:14px; letter-spacing:.02em; opacity:.85; margin:0 0 10px; }
+  h1 { font-family:var(--display); font-weight:700; font-size:clamp(44px, 11vw, 88px); line-height:.95; margin:0 0 14px; letter-spacing:-.01em; }
+  body[data-estilo="nocturno"] h1 { font-weight:600; font-style:italic; letter-spacing:.01em; }
+  body[data-estilo="fresco"] h1 { font-weight:800; letter-spacing:-.03em; }
+  .tagline { font-size:clamp(18px, 4.6vw, 22px); max-width:560px; margin:0 0 26px; opacity:.95; }
+  .open-now { display:inline-flex; align-items:center; gap:8px; font-weight:700; font-size:14.5px; margin-bottom:22px; padding:6px 12px; border-radius:999px; background:rgba(255,255,255,.14); }
+  .open-now i { width:8px; height:8px; border-radius:50%; background:#5ee08d; }
+  .open-now.closed i { background:#ff8a7a; }
+  .ctas { display:flex; flex-wrap:wrap; gap:10px; }
+  .btn { display:inline-flex; align-items:center; gap:9px; padding:14px 20px; border-radius:var(--radius); font-weight:700; text-decoration:none; font-size:16px; border:0; cursor:pointer; }
+  .btn svg { width:19px; height:19px; flex:none; }
+  .btn.main { background:#fff; color:var(--hero-bg); }
+  body[data-estilo="nocturno"] .btn.main { background:var(--accent); color:var(--accent-ink); }
+  .btn.ghost { background:rgba(255,255,255,.14); color:inherit; }
+  .chips { display:flex; flex-wrap:wrap; gap:8px; margin-top:26px; }
+  .chips span { font-size:14px; padding:6px 12px; border:1px solid rgba(255,255,255,.35); border-radius:999px; }
+  .tiles { position:absolute; right:-70px; top:-50px; width:300px; height:300px; opacity:.07; z-index:0; }
+
+  /* Secciones */
+  section.block { padding:56px 0 8px; }
+  h2 { font-family:var(--display); font-size:clamp(30px, 7vw, 42px); font-weight:700; margin:0 0 6px; line-height:1.05; }
+  body[data-estilo="nocturno"] h2 { font-weight:600; font-style:italic; }
+  .lead { color:var(--soft); margin:0 0 24px; }
+  .about { font-size:19px; max-width:640px; }
+
+  /* Carta */
+  .menu-tabs { display:flex; gap:8px; overflow-x:auto; padding-bottom:6px; margin-bottom:18px; scrollbar-width:none; }
+  .menu-tabs button { flex:none; border:1px solid var(--line); background:var(--card); color:var(--ink); padding:9px 16px; border-radius:999px; font:600 15px var(--body); cursor:pointer; }
+  .menu-tabs button[aria-pressed="true"] { background:var(--accent); color:var(--accent-ink); border-color:var(--accent); }
+  .dish { display:grid; grid-template-columns:1fr auto; gap:4px 16px; padding:15px 0; border-bottom:1px dashed var(--line); }
+  .dish b { font-size:17.5px; }
+  .dish .price { font-weight:700; color:var(--accent); white-space:nowrap; }
+  body[data-estilo="nocturno"] .dish .price { color:var(--accent); }
+  .dish p { grid-column:1 / -1; margin:0; color:var(--soft); font-size:15px; }
+  .menu-note { color:var(--soft); font-size:14px; margin-top:14px; }
+
+  /* Horario y dónde */
+  .two { display:grid; gap:22px; }
+  @media (min-width:760px) { .two { grid-template-columns:1fr 1fr; } }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:var(--radius); padding:20px 22px; }
+  .hours div { display:flex; justify-content:space-between; padding:9px 0; border-bottom:1px solid var(--line); font-size:16px; }
+  .hours div:last-child { border-bottom:0; }
+  .hours .today { font-weight:700; color:var(--accent); }
+  .map { width:100%; height:260px; border:0; border-radius:var(--radius); background:var(--line); }
+  .contact-line { display:flex; gap:10px; align-items:center; margin:8px 0; }
+  .contact-line svg { width:18px; height:18px; color:var(--accent); flex:none; }
+
+  .gallery { display:grid; grid-template-columns:repeat(auto-fill, minmax(220px, 1fr)); gap:10px; }
+  .gallery img { aspect-ratio:4/3; object-fit:cover; border-radius:var(--radius); width:100%; }
+
+  footer { margin-top:56px; padding:30px 0 110px; border-top:1px solid var(--line); color:var(--soft); font-size:14px; }
+  .sticky-book { position:fixed; left:14px; right:14px; bottom:calc(14px + env(safe-area-inset-bottom)); z-index:15; display:flex; gap:8px; }
+  .sticky-book .btn { flex:1; justify-content:center; background:var(--accent); color:var(--accent-ink); box-shadow:0 10px 30px rgba(0,0,0,.25); }
+  .sticky-book .btn.alt { flex:0 0 56px; background:var(--ink); color:var(--bg); padding:14px; }
+  @media (min-width:760px) { .sticky-book { display:none; } }
+
+  .empty { max-width:520px; margin:18vh auto; padding:0 24px; text-align:center; font-family:"Karla", sans-serif; }
+</style>
+</head>
+<body data-estilo="taberna">
+<div id="root"></div>
+<script src="../codec.js"></script>
+<script>
+(async function () {
+  const $ = (s) => document.querySelector(s);
+  const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+  const ICON = {
+    wa: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.4.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2s.2-1.1.1-1.2l-.5-.3z"/></svg>',
+    map: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-6.1-7-11a7 7 0 1 1 14 0c0 4.9-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>',
+    tel: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>',
+    ig: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>',
+  };
+  const DAYS = [["lun", "Lunes"], ["mar", "Martes"], ["mie", "Miércoles"], ["jue", "Jueves"], ["vie", "Viernes"], ["sab", "Sábado"], ["dom", "Domingo"]];
+
+  // ---- cargar datos: ?d=slug (archivo) o #z=... (dentro del enlace)
+  let d = null;
+  try {
+    const slug = new URLSearchParams(location.search).get("d");
+    if (slug && /^[a-z0-9-]+$/.test(slug)) d = await (await fetch(`../demos/${slug}.json`, { cache: "no-store" })).json();
+    else d = await DemoCodec.decode(location.hash);
+  } catch (e) { d = null; }
+  if (!d || !d.nombre) {
+    document.title = "Demo no encontrada";
+    $("#root").innerHTML = '<div class="empty"><h1 style="font-size:34px">Demo no encontrada</h1><p>El enlace está incompleto. Pide uno nuevo.</p></div>';
+    return;
+  }
+
+  const estilos = ["taberna", "mediterraneo", "nocturno", "fresco"];
+  document.body.dataset.estilo = estilos.includes(d.estilo) ? d.estilo : "taberna";
+  document.title = `${d.nombre}${d.ciudad ? " · " + d.ciudad : ""}`;
+  const meta = document.createElement("meta"); meta.name = "description"; meta.content = d.eslogan || d.sobre || d.nombre; document.head.appendChild(meta);
+
+  const digits = (s) => String(s || "").replace(/[^\d+]/g, "");
+  const waNum = digits(d.whatsapp || d.telefono).replace(/^\+/, "").replace(/^(?=[6789]\d{8}$)/, "34");
+  const waLink = !waNum ? null : d.ejemplo ? "#ejemplo" : `https://wa.me/${waNum}?text=${encodeURIComponent(`Hola, quería reservar mesa en ${d.nombre}.\nDía:\nHora:\nPersonas:`)}`;
+  const mapQ = encodeURIComponent([d.nombre, d.direccion, d.ciudad].filter(Boolean).join(", "));
+  let mapLink = `https://www.google.com/maps/search/?api=1&query=${mapQ}`;
+  // Ejemplos con datos inventados: los botones no llaman ni abren WhatsApp de nadie
+  const EJ = !!d.ejemplo;
+  const EMBED = new URLSearchParams(location.search).has("embed");
+  const telHref = EJ ? "#ejemplo" : `tel:${digits(d.telefono)}`;
+
+  // ---- horario y "abierto ahora"
+  const parseRanges = (txt) => String(txt || "").toLowerCase().includes("cerrado") ? [] :
+    String(txt || "").split(/[,y]/).map((r) => r.trim().match(/(\d{1,2})[:.]?(\d{2})?\s*[-–a]\s*(\d{1,2})[:.]?(\d{2})?/)).filter(Boolean)
+      .map((m) => [(+m[1]) * 60 + (+(m[2] || 0)), (+m[3]) * 60 + (+(m[4] || 0))]);
+  const h = d.horario || {};
+  const now = new Date();
+  const todayIdx = (now.getDay() + 6) % 7;
+  const mins = now.getHours() * 60 + now.getMinutes();
+  const isOpen = (dayIdx, m) => parseRanges(h[DAYS[dayIdx][0]]).some(([a, b]) => (b > a ? m >= a && m < b : m >= a || m < b));
+  const yIdx = (todayIdx + 6) % 7;
+  const openNow = Object.keys(h).length ? (isOpen(todayIdx, mins) || parseRanges(h[DAYS[yIdx][0]]).some(([a, b]) => b < a && mins < b)) : null;
+
+  // ---- carta
+  const carta = Array.isArray(d.carta) ? d.carta.filter((c) => c && c.items && c.items.length) : [];
+
+  const fotos = (d.fotos || []).filter((u) => /^https:\/\//.test(u));
+  const tiles = `<svg class="tiles" viewBox="0 0 100 100" aria-hidden="true">${Array.from({ length: 25 }, (_, i) => `<rect x="${(i % 5) * 20 + 2}" y="${Math.floor(i / 5) * 20 + 2}" width="16" height="16" rx="${i % 2 ? 8 : 2}" fill="currentColor"/>`).join("")}</svg>`;
+
+  $("#root").innerHTML = `
+    ${d.final || EMBED ? "" : `<div class="demo-bar">Vista previa preparada para ${esc(d.nombre)}. <a href="${esc(d.autorUrl || "../")}#contacto">¿La quieres? Hablemos</a></div>`}
+    <header class="hero ${fotos[0] ? "has-photo" : ""}" ${fotos[0] ? `style="background-image:url('${esc(fotos[0])}')"` : ""}>
+      ${fotos[0] ? "" : tiles}
+      <div class="wrap">
+        <p class="kind">${esc([d.tipo, d.ciudad].filter(Boolean).join(" en "))}</p>
+        <h1>${esc(d.nombre)}</h1>
+        ${d.eslogan ? `<p class="tagline">${esc(d.eslogan)}</p>` : ""}
+        ${openNow == null ? "" : `<div class="open-now ${openNow ? "" : "closed"}"><i></i>${openNow ? "Abierto ahora" : "Cerrado ahora"}</div>`}
+        <div class="ctas">
+          ${waLink ? `<a class="btn main" href="${waLink}" target="_blank" rel="noopener">${ICON.wa}Reservar por WhatsApp</a>` : ""}
+          ${carta.length ? `<a class="btn ghost" href="#carta">Ver la carta</a>` : ""}
+          <a class="btn ghost" href="${mapLink}" target="_blank" rel="noopener">${ICON.map}Cómo llegar</a>
+        </div>
+        ${(d.destacados || []).length ? `<div class="chips">${d.destacados.map((x) => `<span>${esc(x)}</span>`).join("")}</div>` : ""}
+      </div>
+    </header>
+
+    ${d.sobre ? `<section class="block"><div class="wrap"><h2>${esc(d.sobreTitulo || "La casa")}</h2><p class="about">${esc(d.sobre)}</p></div></section>` : ""}
+
+    ${carta.length ? `<section class="block" id="carta"><div class="wrap">
+      <h2>Carta</h2><p class="lead">${esc(d.cartaNota || "Precios con IVA incluido.")}</p>
+      ${carta.length > 1 ? `<div class="menu-tabs" role="tablist">${carta.map((c, i) => `<button type="button" data-cat="${i}" aria-pressed="${i === 0}">${esc(c.cat)}</button>`).join("")}</div>` : ""}
+      <div id="dishes"></div>
+      ${d.alergenos !== false ? `<p class="menu-note">Si tienes alguna alergia o intolerancia, pregúntanos: te informamos de los alérgenos de cada plato.</p>` : ""}
+    </div></section>` : ""}
+
+    ${fotos.length > 1 ? `<section class="block"><div class="wrap"><h2>Fotos</h2><div class="gallery">${fotos.slice(1, 7).map((u) => `<img src="${esc(u)}" alt="Foto de ${esc(d.nombre)}" loading="lazy">`).join("")}</div></div></section>` : ""}
+
+    <section class="block" id="donde"><div class="wrap two">
+      <div>
+        <h2>Horario</h2>
+        <div class="card hours">${DAYS.map(([k, n], i) => `<div class="${i === todayIdx ? "today" : ""}"><span>${n}</span><span>${esc(h[k] || "—")}</span></div>`).join("")}</div>
+      </div>
+      <div>
+        <h2>Dónde estamos</h2>
+        <iframe class="map" loading="lazy" title="Mapa de ${esc(d.nombre)}" src="https://www.google.com/maps?q=${mapQ}&output=embed"></iframe>
+        <div style="margin-top:14px">
+          ${d.direccion ? `<div class="contact-line">${ICON.map}<a href="${mapLink}" target="_blank" rel="noopener">${esc(d.direccion)}${d.ciudad ? ", " + esc(d.ciudad) : ""}</a></div>` : ""}
+          ${d.telefono ? `<div class="contact-line">${ICON.tel}<a href="${esc(telHref)}">${esc(d.telefono)}</a></div>` : ""}
+          ${d.instagram ? `<div class="contact-line">${ICON.ig}<a href="https://instagram.com/${esc(String(d.instagram).replace(/^@/, ""))}" target="_blank" rel="noopener">@${esc(String(d.instagram).replace(/^@/, ""))}</a></div>` : ""}
+        </div>
+      </div>
+    </div></section>
+
+    <footer><div class="wrap">© ${now.getFullYear()} ${esc(d.nombre)}${d.final ? "" : ` · Web de demostración`}</div></footer>
+
+    <div class="sticky-book">
+      ${waLink ? `<a class="btn" href="${waLink}" target="_blank" rel="noopener">${ICON.wa}Reservar</a>` : ""}
+      ${d.telefono ? `<a class="btn alt" href="${esc(telHref)}" aria-label="Llamar">${ICON.tel}</a>` : ""}
+    </div>`;
+
+  if (EJ) document.addEventListener("click", (e) => {
+    const a = e.target.closest('a[href="#ejemplo"]');
+    if (!a) return;
+    e.preventDefault();
+    alert("Negocio de ejemplo. En la web real, este botón abre el WhatsApp o el teléfono del local.");
+  });
+
+  function showCat(i) {
+    const c = carta[i];
+    if (!c) return;
+    $("#dishes").innerHTML = c.items.map((it) => `<div class="dish"><b>${esc(it.n)}</b><span class="price">${it.p ? esc(String(it.p).replace(/\s*€?$/, "")) + " €" : ""}</span>${it.d ? `<p>${esc(it.d)}</p>` : ""}</div>`).join("");
+    document.querySelectorAll("[data-cat]").forEach((b) => b.setAttribute("aria-pressed", String(+b.dataset.cat === i)));
+  }
+  if (carta.length) { showCat(0); document.querySelectorAll("[data-cat]").forEach((b) => (b.onclick = () => showCat(+b.dataset.cat))); }
+})();
+</script>
+</body>
+</html>

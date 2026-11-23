@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Webs para bares y restaurantes de Murcia · Yoel</title>
+<meta name="description" content="Web para tu bar o restaurante en 48 horas: reservas por WhatsApp, carta, horario y mapa. 199 € y 19 €/mes de mantenimiento.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Karla:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root { --ink:#17181c; --soft:#5f6370; --line:#e7e7ea; --bg:#ffffff; --tint:#f4f4f6; --accent:#e4572e; --accent-dark:#b8401d; }
+  * { box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { margin:0; color:var(--ink); background:var(--bg); font:18px/1.6 "Karla", system-ui, sans-serif; -webkit-font-smoothing:antialiased; }
+  a { color:inherit; }
+  .wrap { max-width:1080px; margin:0 auto; padding:0 22px; }
+  h1, h2, h3 { font-family:"Bricolage Grotesque", system-ui, sans-serif; margin:0; letter-spacing:-.02em; }
+  nav { display:flex; justify-content:space-between; align-items:center; padding:20px 0; }
+  nav b { font-family:"Bricolage Grotesque"; font-size:20px; }
+  nav a.cta { font-weight:700; text-decoration:none; background:var(--ink); color:#fff; padding:10px 16px; border-radius:12px; font-size:15px; }
+
+  .hero { display:grid; gap:40px; align-items:center; padding:30px 0 70px; }
+  @media (min-width:900px) { .hero { grid-template-columns:1.1fr .9fr; } }
+  .hero h1 { font-size:clamp(42px, 7.2vw, 74px); line-height:.98; font-weight:800; margin-bottom:20px; }
+  .hero p.sub { font-size:21px; color:var(--soft); max-width:520px; margin:0 0 28px; }
+  .price-line { display:flex; gap:18px; align-items:baseline; flex-wrap:wrap; margin-bottom:28px; }
+  .price-line strong { font-family:"Bricolage Grotesque"; font-size:44px; font-weight:800; }
+  .price-line span { color:var(--soft); }
+  .btn { display:inline-flex; align-items:center; gap:8px; background:var(--accent); color:#fff; text-decoration:none; padding:15px 22px; border-radius:14px; font-weight:700; font-size:17px; border:0; cursor:pointer; }
+  .btn:hover { background:var(--accent-dark); }
+  .btn.light { background:var(--tint); color:var(--ink); }
+
+  /* Teléfono con la demo en vivo: lo que hay que ver */
+  .device { justify-self:center; width:min(340px, 100%); }
+  .phone { aspect-ratio:9/18.5; border-radius:44px; background:#0f0f12; padding:12px; box-shadow:0 30px 80px rgba(23,24,28,.25); }
+  .phone iframe { width:100%; height:100%; border:0; border-radius:34px; background:#fff; }
+  .switch { display:flex; gap:6px; justify-content:center; margin-top:16px; flex-wrap:wrap; }
+  .switch button { border:1px solid var(--line); background:#fff; padding:8px 12px; border-radius:999px; font:600 14px "Karla", sans-serif; cursor:pointer; color:var(--soft); }
+  .switch button[aria-pressed="true"] { border-color:var(--ink); color:var(--ink); }
+  .device p { text-align:center; font-size:14px; color:var(--soft); margin:10px 0 0; }
+
+  section { padding:70px 0; border-top:1px solid var(--line); }
+  section h2 { font-size:clamp(32px, 5vw, 46px); line-height:1.02; font-weight:800; margin-bottom:14px; }
+  .lead { color:var(--soft); font-size:19px; max-width:640px; margin:0 0 34px; }
+  .includes { display:grid; gap:14px 34px; }
+  @media (min-width:760px) { .includes { grid-template-columns:1fr 1fr; } }
+  .includes div { padding:16px 0; border-bottom:1px solid var(--line); }
+  .includes h3 { font-size:20px; margin-bottom:4px; }
+  .includes p { margin:0; color:var(--soft); }
+
+  .steps { counter-reset:s; display:grid; gap:22px; }
+  @media (min-width:760px) { .steps { grid-template-columns:repeat(3, 1fr); } }
+  .steps div { counter-increment:s; }
+  .steps div::before { content:counter(s); display:grid; place-items:center; width:38px; height:38px; border-radius:50%; background:var(--ink); color:#fff; font-weight:700; margin-bottom:12px; }
+  .steps h3 { font-size:21px; margin-bottom:6px; }
+  .steps p { margin:0; color:var(--soft); }
+
+  .pricing { display:grid; gap:18px; }
+  @media (min-width:760px) { .pricing { grid-template-columns:1fr 1fr; } }
+  .plan { border:1px solid var(--line); border-radius:22px; padding:28px; }
+  .plan.dark { background:var(--ink); color:#fff; border-color:var(--ink); }
+  .plan .amount { font-family:"Bricolage Grotesque"; font-size:46px; font-weight:800; }
+  .plan ul { padding-left:20px; margin:14px 0 0; }
+  .plan.dark ul { color:#d4d5db; }
+  .faq details { border-bottom:1px solid var(--line); padding:16px 0; }
+  .faq summary { cursor:pointer; font-weight:700; font-size:19px; }
+  .faq p { color:var(--soft); margin:10px 0 0; }
+  .contact { background:var(--tint); border-radius:28px; padding:40px 30px; text-align:center; }
+  .contact .btns { display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top:22px; }
+  footer { padding:30px 0 50px; color:var(--soft); font-size:14px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav><b>Yoel · webs para hostelería</b><a class="cta" href="#contacto">Pedir mi demo gratis</a></nav>
+
+  <div class="hero">
+    <div>
+      <h1>Tu bar, con web propia en 48 horas.</h1>
+      <p class="sub">Reservas por WhatsApp, la carta siempre al día, tu horario y cómo llegar. Pensada para el móvil, que es desde donde te buscan tus clientes.</p>
+      <div class="price-line"><strong>199 €</strong><span>y 19 €/mes de mantenimiento. Sin permanencia.</span></div>
+      <a class="btn" href="#contacto">Quiero ver la demo de mi local</a>
+    </div>
+    <div class="device">
+      <div class="phone"><iframe id="live" title="Ejemplo de web" src="demo/?embed=1&d=la-higuera" loading="lazy"></iframe></div>
+      <div class="switch" role="group" aria-label="Ejemplos">
+        <button type="button" data-d="la-higuera" aria-pressed="true">Taberna</button>
+        <button type="button" data-d="rincon-del-mar" aria-pressed="false">Arrocería</button>
+        <button type="button" data-d="nonna-rita" aria-pressed="false">Pizzería</button>
+        <button type="button" data-d="medianoche" aria-pressed="false">Coctelería</button>
+      </div>
+      <p>Así quedan (locales de ejemplo). Toca y navega.</p>
+    </div>
+  </div>
+</div>
+
+<section><div class="wrap">
+  <h2>Qué incluye</h2>
+  <p class="lead">Todo lo que un cliente busca antes de ir a tu local, sin que tengas que tocar nada.</p>
+  <div class="includes">
+    <div><h3>Reservas por WhatsApp</h3><p>Un botón que abre tu WhatsApp con el mensaje ya escrito: día, hora y personas.</p></div>
+    <div><h3>Carta con precios</h3><p>Por categorías y fácil de leer en el móvil. Me mandas los cambios y los subo.</p></div>
+    <div><h3>Horario y "abierto ahora"</h3><p>Tu horario de cada día y si estás abierto en ese momento.</p></div>
+    <div><h3>Mapa y cómo llegar</h3><p>Un toque y Google Maps les lleva a tu puerta.</p></div>
+    <div><h3>Ficha de Google mejorada</h3><p>Reviso tu ficha de Google Maps y enlazo la web para que aparezcas mejor.</p></div>
+    <div><h3>Dominio propio</h3><p>tulocal.com o .es (unos 12 € al año, a tu nombre).</p></div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <h2>Cómo funciona</h2>
+  <p class="lead">Sin reuniones largas ni formularios.</p>
+  <div class="steps">
+    <div><h3>Te preparo la demo</h3><p>Con tu nombre, tu carta y tu horario. Gratis y sin compromiso.</p></div>
+    <div><h3>La revisas</h3><p>Me dices qué cambiar: fotos, platos, colores.</p></div>
+    <div><h3>En 48 h está online</h3><p>Pagas cuando está lista y te gusta.</p></div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <h2>Precio</h2>
+  <p class="lead">Claro desde el principio.</p>
+  <div class="pricing">
+    <div class="plan"><div class="amount">199 €</div><p>Pago único al entregar la web.</p>
+      <ul><li>Diseño y montaje completo</li><li>Carta, horario, mapa y reservas</li><li>Revisión de tu ficha de Google</li><li>Dos rondas de cambios</li></ul></div>
+    <div class="plan dark"><div class="amount">19 €/mes</div><p>Mantenimiento. Sin permanencia.</p>
+      <ul><li>Alojamiento de la web incluido</li><li>Cambios de carta y precios cuando quieras</li><li>Horarios especiales (festivos, vacaciones)</li><li>Soporte por WhatsApp</li></ul></div>
+  </div>
+</div></section>
+
+<section class="faq"><div class="wrap">
+  <h2>Preguntas</h2>
+  <details><summary>¿Y si ya tengo Instagram?</summary><p>Perfecto, lo enlazo. Pero Instagram no sale bien en Google ni muestra tu carta, tu horario y las reservas en un solo sitio. La web sí.</p></details>
+  <details><summary>¿La web es mía?</summary><p>Sí. El dominio va a tu nombre y, si un día lo dejas, te doy los archivos.</p></details>
+  <details><summary>¿Tengo que saber de ordenadores?</summary><p>No. Me mandas los cambios por WhatsApp y yo los hago.</p></details>
+  <details><summary>¿Y si quiero dejar el mantenimiento?</summary><p>Se cancela cuando quieras, sin permanencia.</p></details>
+</div></section>
+
+<section id="contacto"><div class="wrap">
+  <div class="contact">
+    <h2>¿Te preparo la demo de tu local?</h2>
+    <p class="lead" style="margin:0 auto">Dime el nombre de tu bar o restaurante y en un día la tienes en tu móvil. Sin compromiso.</p>
+    <div class="btns" id="contactBtns"></div>
+  </div>
+</div></section>
+
+<div class="wrap"><footer>Yoel · Webs para bares y restaurantes · Murcia</footer></div>
+
+<script>
+  // ===== Tus datos de contacto (rellénalos) =====
+  const CONTACTO = { whatsapp: "", telefono: "", email: "" };
+
+  const btns = [];
+  const digits = (s) => String(s).replace(/[^\d]/g, "");
+  if (CONTACTO.whatsapp) btns.push(`<a class="btn" href="https://wa.me/${digits(CONTACTO.whatsapp).replace(/^(?=[67]\d{8}$)/, "34")}?text=${encodeURIComponent("Hola Yoel, quiero ver la demo de mi local: ")}" target="_blank" rel="noopener">Escribir por WhatsApp</a>`);
+  if (CONTACTO.telefono) btns.push(`<a class="btn light" href="tel:${digits(CONTACTO.telefono)}">Llamar</a>`);
+  if (CONTACTO.email) btns.push(`<a class="btn light" href="mailto:${CONTACTO.email}?subject=${encodeURIComponent("Demo para mi local")}">Enviar un email</a>`);
+  document.getElementById("contactBtns").innerHTML = btns.join("") || '<p style="color:#5f6370">Contacto disponible muy pronto.</p>';
+
+  document.querySelectorAll(".switch button").forEach((b) => b.onclick = () => {
+    document.getElementById("live").src = "demo/?embed=1&d=" + b.dataset.d;
+    document.querySelectorAll(".switch button").forEach((x) => x.setAttribute("aria-pressed", String(x === b)));
+  });
+</script>
+</body>
+</html>
